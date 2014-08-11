@@ -85,6 +85,8 @@ if( !class_exists('DP_Importer') ) {
       $feed = fetch_feed('http://dribbble.com/' . $user . '/shots.rss');
       $feed = $feed->get_items(0); 
 
+      set_transient( self::DPI_TRANSIENT, TRUE, HOUR_IN_SECONDS );
+
       $shots = array();
       foreach ( $feed as $item ) {
         $shots[$item->get_date('Ymd')] = array(
