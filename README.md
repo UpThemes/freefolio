@@ -29,6 +29,10 @@ If it does, it will create `jetpack-portfolio` posts for items that don't exist.
 
 *THIS PLUGIN IS ONLY AN IMPORTER - YOU NEED TO DO TEMPLATING YOURSELF*
 
+Shout out to:
+- [Tammy Hart(http://www.tammyhartdesigns.com/) for http://zurb.com/forrst/posts/Dribbble_to_WordPress-wZv 
+- [The nice folks at array.is](https://array.is) for https://array.is/articles/designer/#install-array-portfolio
 
+Both of which I've adapted for use in this plugin. Yay Open Source! :heart: :metal: :rocket:
 
 
