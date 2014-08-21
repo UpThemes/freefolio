@@ -187,7 +187,7 @@ if( !class_exists('DP_Importer') ) {
      * @since   1.0.0
      */
     private static function jetpack_portfolio_polyfill() {
-        require_once( DPI__PLUGIN_DIR . 'class.Freefolio.php' );
+        require_once( trailingslashit( DPI__PLUGIN_DIR ) . 'class.Freefolio.php' );
     }
 
 
