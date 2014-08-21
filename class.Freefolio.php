@@ -1,6 +1,6 @@
 <?php
 
-class Jetpack_Portfolio_Polyfill {
+class Freefolio {
   const CUSTOM_POST_TYPE       = 'jetpack-portfolio';
   const CUSTOM_TAXONOMY_TYPE   = 'jetpack-portfolio-type';
   const CUSTOM_TAXONOMY_TAG    = 'jetpack-portfolio-tag';
@@ -13,7 +13,7 @@ class Jetpack_Portfolio_Polyfill {
     static $instance = false;
 
     if ( ! $instance ) {
-      $instance = new Jetpack_Portfolio_Polyfill;
+      $instance = new Freefolio;
     }
 
     return $instance;
@@ -664,5 +664,5 @@ class Jetpack_Portfolio_Polyfill {
   }
 }
 
-add_action( 'init', array( 'Jetpack_Portfolio_Polyfill', 'init' ), 13 );
+add_action( 'init', array( 'Freefolio', 'init' ), 13 );
 
