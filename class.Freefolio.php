@@ -96,7 +96,7 @@ class Jetpack_Portfolio_Polyfill {
 
     add_settings_field(
       self::OPTION_NAME,
-      '<span class="cpt-options">' . __( 'Portfolio Projects', 'jetpack' ) . '</span>',
+      '<span class="cpt-options">' . __( 'Portfolio Projects', 'freefolio' ) . '</span>',
       array( $this, 'setting_html' ),
       'writing',
       'jetpack_cpt_section'
@@ -122,7 +122,7 @@ class Jetpack_Portfolio_Polyfill {
    */
   function jetpack_cpt_section_callback() {
     printf( '<p>%s</p>',
-          sprintf( __( 'Use these settings to display different types of content on your site. <a target="_blank" href="%s">Learn more</a>.' , 'jetpack' ),
+          sprintf( __( 'Use these settings to display different types of content on your site. <a target="_blank" href="%s">Learn more</a>.' , 'freefolio' ),
             esc_url( 'http://en.support.wordpress.com/portfolios/' )
           )
         );
@@ -138,12 +138,12 @@ class Jetpack_Portfolio_Polyfill {
     printf( '<label for="%1$s"><input name="%1$s" id="%1$s" type="checkbox" value="1" %2$s/>%3$s</label>',
       esc_attr( self::OPTION_NAME ),
       checked( get_option( self::OPTION_NAME, '0' ), true, false ),
-      __( 'Enable', 'jetpack' )
+      __( 'Enable', 'freefolio' )
     );
 
     printf( '<p><label for="%1$s">%2$s</label></p>',
       esc_attr( self::OPTION_READING_SETTING ),
-      sprintf( __( 'Portfolio pages display at most %1$s projects', 'jetpack' ),
+      sprintf( __( 'Portfolio pages display at most %1$s projects', 'freefolio' ),
         sprintf( '<input name="%1$s" id="%1$s" type="number" step="1" min="1" value="%2$s" class="small-text" />',
           esc_attr( self::OPTION_READING_SETTING ),
           esc_attr( get_option( self::OPTION_READING_SETTING, '10' ), true, false )
@@ -230,20 +230,20 @@ class Jetpack_Portfolio_Polyfill {
     }
 
     register_post_type( self::CUSTOM_POST_TYPE, array(
-      'description' => __( 'Portfolio Items', 'jetpack' ),
+      'description' => __( 'Portfolio Items', 'freefolio' ),
       'labels' => array(
-        'name'               => esc_html__( 'Projects',                   'jetpack' ),
-        'singular_name'      => esc_html__( 'Project',                    'jetpack' ),
-        'menu_name'          => esc_html__( 'Portfolio',                  'jetpack' ),
-        'all_items'          => esc_html__( 'All Projects',               'jetpack' ),
-        'add_new'            => esc_html__( 'Add New',                    'jetpack' ),
-        'add_new_item'       => esc_html__( 'Add New Project',            'jetpack' ),
-        'edit_item'          => esc_html__( 'Edit Project',               'jetpack' ),
-        'new_item'           => esc_html__( 'New Project',                'jetpack' ),
-        'view_item'          => esc_html__( 'View Project',               'jetpack' ),
-        'search_items'       => esc_html__( 'Search Projects',            'jetpack' ),
-        'not_found'          => esc_html__( 'No Projects found',          'jetpack' ),
-        'not_found_in_trash' => esc_html__( 'No Projects found in Trash', 'jetpack' ),
+        'name'               => esc_html__( 'Projects',                   'freefolio' ),
+        'singular_name'      => esc_html__( 'Project',                    'freefolio' ),
+        'menu_name'          => esc_html__( 'Portfolio',                  'freefolio' ),
+        'all_items'          => esc_html__( 'All Projects',               'freefolio' ),
+        'add_new'            => esc_html__( 'Add New',                    'freefolio' ),
+        'add_new_item'       => esc_html__( 'Add New Project',            'freefolio' ),
+        'edit_item'          => esc_html__( 'Edit Project',               'freefolio' ),
+        'new_item'           => esc_html__( 'New Project',                'freefolio' ),
+        'view_item'          => esc_html__( 'View Project',               'freefolio' ),
+        'search_items'       => esc_html__( 'Search Projects',            'freefolio' ),
+        'not_found'          => esc_html__( 'No Projects found',          'freefolio' ),
+        'not_found_in_trash' => esc_html__( 'No Projects found in Trash', 'freefolio' ),
       ),
       'supports' => array(
         'title',
@@ -271,18 +271,18 @@ class Jetpack_Portfolio_Polyfill {
     register_taxonomy( self::CUSTOM_TAXONOMY_TYPE, self::CUSTOM_POST_TYPE, array(
       'hierarchical'      => true,
       'labels'            => array(
-        'name'              => esc_html__( 'Project Types',         'jetpack' ),
-        'singular_name'     => esc_html__( 'Project Type',          'jetpack' ),
-        'menu_name'         => esc_html__( 'Project Types',         'jetpack' ),
-        'all_items'         => esc_html__( 'All Project Types',     'jetpack' ),
-        'edit_item'         => esc_html__( 'Edit Project Type',     'jetpack' ),
-        'view_item'         => esc_html__( 'View Project Type',     'jetpack' ),
-        'update_item'       => esc_html__( 'Update Project Type',   'jetpack' ),
-        'add_new_item'      => esc_html__( 'Add New Project Type',  'jetpack' ),
-        'new_item_name'     => esc_html__( 'New Project Type Name', 'jetpack' ),
-        'parent_item'       => esc_html__( 'Parent Project Type',   'jetpack' ),
-        'parent_item_colon' => esc_html__( 'Parent Project Type:',  'jetpack' ),
-        'search_items'      => esc_html__( 'Search Project Types',  'jetpack' ),
+        'name'              => esc_html__( 'Project Types',         'freefolio' ),
+        'singular_name'     => esc_html__( 'Project Type',          'freefolio' ),
+        'menu_name'         => esc_html__( 'Project Types',         'freefolio' ),
+        'all_items'         => esc_html__( 'All Project Types',     'freefolio' ),
+        'edit_item'         => esc_html__( 'Edit Project Type',     'freefolio' ),
+        'view_item'         => esc_html__( 'View Project Type',     'freefolio' ),
+        'update_item'       => esc_html__( 'Update Project Type',   'freefolio' ),
+        'add_new_item'      => esc_html__( 'Add New Project Type',  'freefolio' ),
+        'new_item_name'     => esc_html__( 'New Project Type Name', 'freefolio' ),
+        'parent_item'       => esc_html__( 'Parent Project Type',   'freefolio' ),
+        'parent_item_colon' => esc_html__( 'Parent Project Type:',  'freefolio' ),
+        'search_items'      => esc_html__( 'Search Project Types',  'freefolio' ),
       ),
       'public'            => true,
       'show_ui'           => true,
@@ -295,21 +295,21 @@ class Jetpack_Portfolio_Polyfill {
     register_taxonomy( self::CUSTOM_TAXONOMY_TAG, self::CUSTOM_POST_TYPE, array(
       'hierarchical'      => false,
       'labels'            => array(
-        'name'                       => esc_html__( 'Project Tags',                   'jetpack' ),
-        'singular_name'              => esc_html__( 'Project Tag',                    'jetpack' ),
-        'menu_name'                  => esc_html__( 'Project Tags',                   'jetpack' ),
-        'all_items'                  => esc_html__( 'All Project Tags',               'jetpack' ),
-        'edit_item'                  => esc_html__( 'Edit Project Tag',               'jetpack' ),
-        'view_item'                  => esc_html__( 'View Project Tag',               'jetpack' ),
-        'update_item'                => esc_html__( 'Update Project Tag',             'jetpack' ),
-        'add_new_item'               => esc_html__( 'Add New Project Tag',            'jetpack' ),
-        'new_item_name'              => esc_html__( 'New Project Tag Name',           'jetpack' ),
-        'search_items'               => esc_html__( 'Search Project Tags',            'jetpack' ),
-        'popular_items'              => esc_html__( 'Popular Project Tags',           'jetpack' ),
-        'separate_items_with_commas' => esc_html__( 'Separate tags with commas',      'jetpack' ),
-        'add_or_remove_items'        => esc_html__('Add or remove tags',              'jetpack' ),
-        'choose_from_most_used'      => esc_html__( 'Choose from the most used tags', 'jetpack' ),
-        'not_found'                  => esc_html__( 'No tags found.',                 'jetpack' ),
+        'name'                       => esc_html__( 'Project Tags',                   'freefolio' ),
+        'singular_name'              => esc_html__( 'Project Tag',                    'freefolio' ),
+        'menu_name'                  => esc_html__( 'Project Tags',                   'freefolio' ),
+        'all_items'                  => esc_html__( 'All Project Tags',               'freefolio' ),
+        'edit_item'                  => esc_html__( 'Edit Project Tag',               'freefolio' ),
+        'view_item'                  => esc_html__( 'View Project Tag',               'freefolio' ),
+        'update_item'                => esc_html__( 'Update Project Tag',             'freefolio' ),
+        'add_new_item'               => esc_html__( 'Add New Project Tag',            'freefolio' ),
+        'new_item_name'              => esc_html__( 'New Project Tag Name',           'freefolio' ),
+        'search_items'               => esc_html__( 'Search Project Tags',            'freefolio' ),
+        'popular_items'              => esc_html__( 'Popular Project Tags',           'freefolio' ),
+        'separate_items_with_commas' => esc_html__( 'Separate tags with commas',      'freefolio' ),
+        'add_or_remove_items'        => esc_html__('Add or remove tags',              'freefolio' ),
+        'choose_from_most_used'      => esc_html__( 'Choose from the most used tags', 'freefolio' ),
+        'not_found'                  => esc_html__( 'No tags found.',                 'freefolio' ),
       ),
       'public'            => true,
       'show_ui'           => true,
@@ -328,19 +328,19 @@ class Jetpack_Portfolio_Polyfill {
 
     $messages[self::CUSTOM_POST_TYPE] = array(
       0  => '', // Unused. Messages start at index 1.
-      1  => sprintf( __( 'Project updated. <a href="%s">View item</a>', 'jetpack'), esc_url( get_permalink( $post->ID ) ) ),
-      2  => esc_html__( 'Custom field updated.', 'jetpack' ),
-      3  => esc_html__( 'Custom field deleted.', 'jetpack' ),
-      4  => esc_html__( 'Project updated.', 'jetpack' ),
+      1  => sprintf( __( 'Project updated. <a href="%s">View item</a>', 'freefolio'), esc_url( get_permalink( $post->ID ) ) ),
+      2  => esc_html__( 'Custom field updated.', 'freefolio' ),
+      3  => esc_html__( 'Custom field deleted.', 'freefolio' ),
+      4  => esc_html__( 'Project updated.', 'freefolio' ),
       /* translators: %s: date and time of the revision */
-      5  => isset( $_GET['revision'] ) ? sprintf( esc_html__( 'Project restored to revision from %s', 'jetpack'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-      6  => sprintf( __( 'Project published. <a href="%s">View project</a>', 'jetpack' ), esc_url( get_permalink( $post->ID ) ) ),
-      7  => esc_html__( 'Project saved.', 'jetpack' ),
-      8  => sprintf( __( 'Project submitted. <a target="_blank" href="%s">Preview project</a>', 'jetpack'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
-      9  => sprintf( __( 'Project scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview project</a>', 'jetpack' ),
+      5  => isset( $_GET['revision'] ) ? sprintf( esc_html__( 'Project restored to revision from %s', 'freefolio'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+      6  => sprintf( __( 'Project published. <a href="%s">View project</a>', 'freefolio' ), esc_url( get_permalink( $post->ID ) ) ),
+      7  => esc_html__( 'Project saved.', 'freefolio' ),
+      8  => sprintf( __( 'Project submitted. <a target="_blank" href="%s">Preview project</a>', 'freefolio'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
+      9  => sprintf( __( 'Project scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview project</a>', 'freefolio' ),
       // translators: Publish box date format, see http://php.net/date
-      date_i18n( __( 'M j, Y @ G:i', 'jetpack' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post->ID ) ) ),
-      10 => sprintf( __( 'Project item draft updated. <a target="_blank" href="%s">Preview project</a>', 'jetpack' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
+      date_i18n( __( 'M j, Y @ G:i', 'freefolio' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post->ID ) ) ),
+      10 => sprintf( __( 'Project item draft updated. <a target="_blank" href="%s">Preview project</a>', 'freefolio' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
     );
 
     return $messages;
@@ -352,7 +352,7 @@ class Jetpack_Portfolio_Polyfill {
    */
   function edit_admin_columns( $columns ) {
     // change 'Title' to 'Project'
-    $columns['title'] = __( 'Project', 'jetpack' );
+    $columns['title'] = __( 'Project', 'freefolio' );
 
     // add featured image before 'Project'
     $columns = array_slice( $columns, 0, 1, true ) + array( 'thumbnail' => '' ) + array_slice( $columns, 1, NULL, true );
@@ -440,7 +440,7 @@ class Jetpack_Portfolio_Polyfill {
     $atts['showposts'] = intval( $atts['showposts'] );
 
     // enqueue shortcode styles when shortcode is used
-    wp_enqueue_style( 'jetpack-portfolio-style', plugins_url( 'portfolio-shortcode.css', __FILE__ ), array(), '20140326' );
+    wp_enqueue_style( 'jetpack-portfolio-style', plugins_url( 'css/portfolio-shortcode.css', __FILE__ ), array(), '20140326' );
 
     return self::portfolio_shortcode_html( $atts );
   }
@@ -603,7 +603,7 @@ class Jetpack_Portfolio_Polyfill {
       return;
     }
 
-    $html = '<div class="project-types"><span>' . __( 'Types', 'jetpack' ) . '</span>';
+    $html = '<div class="project-types"><span>' . __( 'Types', 'freefolio' ) . '</span>';
 
     // Loop thorugh all the types
     foreach ( $project_types as $project_type ) {
@@ -634,7 +634,7 @@ class Jetpack_Portfolio_Polyfill {
       return false;
     }
 
-    $html = '<div class="project-tags"><span>' . __( 'Tags', 'jetpack' ) . '</span>';
+    $html = '<div class="project-tags"><span>' . __( 'Tags', 'freefolio' ) . '</span>';
 
     // Loop thorugh all the tags
     foreach ( $project_tags as $project_tag ) {
@@ -665,4 +665,4 @@ class Jetpack_Portfolio_Polyfill {
 }
 
 add_action( 'init', array( 'Jetpack_Portfolio_Polyfill', 'init' ), 13 );
- 
+

@@ -71,7 +71,7 @@ if( !class_exists('DP_Importer') ) {
      */
     private static function process_dribbble_feed() {
 
-      // Check if transient exists, if so exit 
+      // Check if transient exists, if so exit
       if( get_transient( self::DPI_TRANSIENT ) ) {
         return;
       }
@@ -83,7 +83,7 @@ if( !class_exists('DP_Importer') ) {
       require_once( ABSPATH . WPINC . '/feed.php' );
 
       $feed = fetch_feed('http://dribbble.com/' . $user . '/shots.rss');
-      $feed = $feed->get_items(0); 
+      $feed = $feed->get_items(0);
 
       set_transient( self::DPI_TRANSIENT, TRUE, HOUR_IN_SECONDS );
 
@@ -114,18 +114,18 @@ if( !class_exists('DP_Importer') ) {
 
       $shot_post = array(
         'post_type'   => self::PORTFOLIO_CPT,
-        'post_status'   => 'publish',
-        'post_author'   => 1,
+        'post_status' => 'publish',
+        'post_author' => 1,
         'post_title'  => $item['title'],
         'post_date'   => $item['date']
       );
 
       $shot_post_meta = array(
-        'link_url'  =>  $item['url'],
-        'image'   =>    $item['image']
+        'link_url'    => $item['url'],
+        'image'       => $item['image']
       );
 
-      $posts = get_posts( 
+      $posts = get_posts(
         array(
           'post_type' => self::PORTFOLIO_CPT,
           'meta_key'  => 'link_url',
@@ -133,10 +133,10 @@ if( !class_exists('DP_Importer') ) {
         )
       );
 
-      if (count($posts) == 0) {   
+      if (count($posts) == 0) {
         $post_id = wp_insert_post($shot_post);
         add_post_meta($post_id, 'dribbble_link_url', $shot_post_meta['link_url'], true);
-        add_post_meta($post_id, 'dribbble_image_url', $shot_post_meta['image'], true); 
+        add_post_meta($post_id, 'dribbble_image_url', $shot_post_meta['image'], true);
 
         // @TODO: Add sideload & post thumbnail addition of the image at the dribbble_image_url meta value
       }
@@ -158,7 +158,7 @@ if( !class_exists('DP_Importer') ) {
       }
       return trim($img[$img_tag][2][0], '"');
 
-    } 
+    }
 
 
 
@@ -187,7 +187,7 @@ if( !class_exists('DP_Importer') ) {
      * @since   1.0.0
      */
     private static function jetpack_portfolio_polyfill() {
-        require_once( DPI__PLUGIN_DIR . 'class.Jetpack_Portfolio_Polyfill.php' );
+        require_once( DPI__PLUGIN_DIR . 'class.Freefolio.php' );
     }
 
 
@@ -197,7 +197,7 @@ if( !class_exists('DP_Importer') ) {
      * @since   1.0.0
      */
     public static function plugin_textdomain() {
-      load_plugin_textdomain( DPI__DOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+      load_plugin_textdomain( 'freefolio', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
 
 
@@ -239,7 +239,7 @@ if( !class_exists('DP_Importer') ) {
 
       add_settings_field(
         self::USERNAME_OPTION,
-        '<span class="cpt-options dribbble-username-label">' . __( 'Dribbble Username', DPI__DOMAIN ) . '</span>',
+        '<span class="cpt-options dribbble-username-label">' . __( 'Dribbble Username', 'freefolio' ) . '</span>',
         array( $this, 'render_dribbble_username_field' ),
         'writing',
         'jetpack_cpt_section'
@@ -264,7 +264,7 @@ if( !class_exists('DP_Importer') ) {
 
     public static function need_username_notice() {
       $url = admin_url( 'options-writing.php#' . esc_attr( self::USERNAME_OPTION ) );
-      echo '<div class="update-nag"><p><strong>Dribbble Portfolio Importer</strong> needs a username to work. <a href="' . $url . '">Add it now</a>.</p></div>';
+      echo '<div class="update-nag"><p>' . sprintf( __( 'The Dribbble portfolio importer requires a valid Dribbble username to work. <a href="%s">Add it now</a>', 'freefolio' ) , $url ) . '</p></div>';
     }
 
 
