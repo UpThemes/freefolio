@@ -6,7 +6,7 @@ if( !class_exists('DP_Importer') ):
 
     const USERNAME_OPTION = 'dpi_username';
     const USERINFO_OPTION = 'dpi_userinfo';
-    const DPI_TRANSIENT   = 'dpi_import_page';
+    const DPI_TRANSIENT   = 'dpi_import';
     const PORTFOLIO_CPT   = 'jetpack-portfolio';
 
 
@@ -60,6 +60,12 @@ if( !class_exists('DP_Importer') ):
 
       //register admin menu
       add_action('admin_menu', array(__CLASS__, 'dpi_create_top_level_menu') );
+      
+      //add import cron
+      add_action( 'dpi_import',array( __CLASS__, 'import_shots_to_posts' ) );
+      
+      //add cron init
+      add_action('admin_init', array( __CLASS__, 'import_init' ) );
 
     }
 
@@ -315,6 +321,25 @@ if( !class_exists('DP_Importer') ):
     }
 
     /**
+     * Initialize import
+     *
+     * @static
+     * @since   1.1.0
+     */
+    public static function import_init(){
+      
+      $import_needed = get_transient( self::DPI_TRANSIENT );
+      
+      //if import isn't needed, return
+      if( $import_needed != 1 ){
+        return;
+      }
+      
+      wp_schedule_event( time(), 'hourly', 'dpi_import' , array() );
+      
+    }
+    
+    /**
      * Gets Dribbble shots frum username and runs the import
      *
      * @static
@@ -322,56 +347,49 @@ if( !class_exists('DP_Importer') ):
      */
     public static function import_shots_to_posts(){
       $user_name = get_option( self::USERNAME_OPTION );
-
+      
       $user_info = get_option( self::USERINFO_OPTION );
 
-      $page_count = ceil( $user_info['shots_count'] / 30 );
-      
-      $import_page = get_transient( self::DPI_TRANSIENT );
-      
-      if( $import_page === false ){
-        $import_page = $page_count;
-      }
-      
-      $results = self::dribbble_get_shots($user_name,$import_page);
-      
-      if( $results === false || empty( $results ) ){
-        delete_transient( self::DPI_TRANSIENT );
-        echo '<div class="updated error"><p><strong>' . __('Oops - somethng went wrong with the import', 'freefolio' ) . '</strong></p></div>';
-        return false;
-      }
+      $page_count = ceil($user_info['shots_count'] / 30);
 
-      $shots = array();
+      for( $page=1; $page<= $page_count; $page++ ):
 
-      foreach ( $results['shots'] as $item ) {
+        //get dribble shots for page X
+        $results = self::dribbble_get_shots($user_name,$page);
 
-        //setup data
-        $shot_import = array(
-          'id' => $item['id'],
-          'url' => esc_url( $item['url'] ),
-          'date' => date('Y-m-d H:i:s', strtotime($item['created_at'])),
-          'title' => esc_html( $item['title'] ),
-          'image' => $item['image_url'],
-          'description' => $item['description'],
-        );
 
-        //import the shot
-        self::import_dribbble_item( $shot_import );
+        if( $results === false || empty( $results ) ){
+          echo '<div class="error"><p><strong>' . __('Oops - somethng went wrong with the import', 'freefolio' ) . '</strong></p></div>';
+        } else{
 
-      }
+          $shots = array();
+
+          foreach ( $results['shots'] as $item ) {
+
+            //setup data
+            $shot_import = array(
+              'id' => $item['id'],
+              'url' => esc_url( $item['url'] ),
+              'date' => date('Y-m-d H:i:s', strtotime($item['created_at'])),
+              'title' => esc_html( $item['title'] ),
+              'image' => $item['image_url'],
+              'description' => $item['description'],
+            );
+
+            //import the shot
+            self::import_dribbble_item( $shot_import );
+
+          }
+
+        }
+
+      endfor;
+      $timestamp = wp_next_scheduled( 'dpi_import' , array() );    
+ 
+      wp_unschedule_event( $timestamp, 'dpi_import', array() );
       
-      if( $import_page > 1 ){
-        $import_page--;
-        set_transient( self::DPI_TRANSIENT, $import_page, HOUR_IN_SECONDS );
-        return $import_page;
-      } else{
-        set_transient( self::DPI_TRANSIENT, TRUE, HOUR_IN_SECONDS );
-        return true;
-      }
-      
-      
+      delete_transient( self::DPI_TRANSIENT );
     }
-
 
   /**
     * registers Dribbble importer options page with WordPress admin
@@ -453,20 +471,10 @@ if( !class_exists('DP_Importer') ):
 
           //if the import button was clicked
           if( isset( $_POST['import'] ) ){
-            //run the import
-            $import_results = self::import_shots_to_posts();
-            
-            $page_count = ceil( $user_info['shots_count'] / 30 );
-            
-            //if there are more pages to go
-            if( $import_results > 1 ){
-              echo '<div class="updated"><p><strong>' . __('Imported Page ' . ($page_count - $import_results) . ' of ' . $page_count, 'freefolio' ) . '</strong></p><p><strong>' . __('Please run the import again for the next page', 'freefolio' ) . '</strong></p></div>';
-            }
-            //if import was successful
-            else if( $import_results === true ){
-              //display success message
-              echo '<div class="updated"><p><strong>' . __('Imported Page ' . $page_count . ' of ' . $page_count .' - all done!', 'freefolio' ) . '</strong></p></div>';
-            }
+              //set transient
+              set_transient( self::DPI_TRANSIENT, true, HOUR_IN_SECONDS );
+              //display message
+              echo '<div class="updated"><p><strong>' . __('Imported started', 'freefolio' ) . '</strong></p></div>';
           } else{
             echo '<div class="updated"><p><strong>' . __('Settings Saved', 'freefolio' ) . '</strong></p></div>';
           }
