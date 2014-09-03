@@ -71,8 +71,6 @@ if( !class_exists('DP_Importer') ) {
      */
     private static function process_dribbble_feed() {
 
-      delete_transient( self::DPI_TRANSIENT );
-
       // Check if transient exists, if so exit
       if( get_transient( self::DPI_TRANSIENT ) ) {
         return;

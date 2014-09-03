@@ -1,5 +1,5 @@
 === Freefolio ===
-Contributors: matthewsimo, chriswallace
+Contributors: mattsimo, chriswallace, andrewtaylor-1, upthemes
 Donate link: https://upthemes.com/themes/creative/
 Tags: portfolio,dribbble,post types
 Requires at least: 3.8
@@ -12,12 +12,14 @@ The best way to get up and running with a portfolio on your very own WordPress w
 
 == Description ==
 
+Freefolio adds a portfolio to your WordPress website
+
 * Adds a portfolio post type (compatible with Jetpack)
 * Adds a Project Type taxonomy (works like categories)
 * Adds a Project Tag taxonomy (works like tags)
 * Syncs your Dribbble shots to WordPress (imports old shots as well)
 
-=== Credits ===
+= Credits =
 
 - The amazing team at [automattic.com](http://automattic.com/) for [jetpack](http://jetpack.me/) and, specifically, the Jetpack Portfolio post type.
 - [Tammy Hart](http://www.tammyhartdesigns.com/) for http://zurb.com/forrst/posts/Dribbble_to_WordPress-wZv
