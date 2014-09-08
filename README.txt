@@ -34,7 +34,11 @@ Freefolio adds a portfolio to your WordPress website
 3. Click 'Install Now'
 4. Activate the plugin on the Plugin dashboard
 5. Visit `General > Writing` settings and enable the `Portfolio Projects` option.
-6. Add your dribbble username in the appropriate settings field.
+6. Visit `Tools > Dribbble Importer`
+7. Add your dribbble username in the appropriate settings field.
+8. Click the "Import Shots From Dribbble" button
+9. Wait for the import to finish - it may take up to 15 minutes for all shots to be imported
+10. Visit `Portfolio` to see the imported items
 
 = Uploading in WordPress Dashboard =
 
@@ -44,7 +48,11 @@ Freefolio adds a portfolio to your WordPress website
 4. Click 'Install Now'
 5. Activate the plugin in the Plugin dashboard
 6. Visit `General > Writing` settings and enable the `Portfolio Projects` option.
-7. Add your dribbble username in the appropriate settings field.
+7. Visit `Tools > Dribbble Importer`
+8. Add your dribbble username in the appropriate settings field.
+9. Click the "Import Shots From Dribbble" button
+10. Wait for the import to finish - it may take up to 15 minutes for all shots to be imported
+11. Visit `Portfolio` to see the imported items
 
 = Using FTP =
 
@@ -53,13 +61,17 @@ Freefolio adds a portfolio to your WordPress website
 3. Upload the `plugin-name` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
 5. Visit `General > Writing` settings and enable the `Portfolio Projects` option.
-6. Add your dribbble username in the appropriate settings field.
+6. Visit `Tools > Dribbble Importer`
+7. Add your dribbble username in the appropriate settings field.
+8. Click the "Import Shots From Dribbble" button
+9. Wait for the import to finish - it may take up to 15 minutes for all shots to be imported
+10. Visit `Portfolio` to see the imported items
 
 == Frequently Asked Questions ==
 
 = How does the Dribbble importer work? =
 
-The plugin sets a transient that expires every hour. It will check against this transient to see if it should look at your dribbble feed and see if it needs to import any posts.
+When the import button is clicked the plugin will work in the background to read your dribbble feed and see if it needs to import any posts.
 
 If it does, it will create `jetpack-portfolio` posts for items that don't exist. It will also create two post meta key/values:
 
@@ -81,3 +93,11 @@ Shortcode options:
 Shortcode example:
 
 [portfolio display_types=true display_tags=false include_type=ui-design,app-design columns=3 showposts=10]
+
+== Changelog ==
+
+= 1.1.0 =
+* Updated Dribbble importer to use v1 of the Dribbble API
+
+= 1.0.0 =
+* Initial release
