@@ -1,0 +1,328 @@
+# Copyright (C) 2014 Freefolio
+# This file is distributed under the same license as the Freefolio package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Freefolio 1.1.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/freefolio\n"
+"POT-Creation-Date: 2014-09-08 18:29:11+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: class.DP_Importer.php:151
+msgid ""
+"The Dribbble portfolio importer requires a valid Dribbble username to work. "
+"<a href=\"%s\">Add it now</a>"
+msgstr ""
+
+#: class.DP_Importer.php:362
+msgid "Oops - somethng went wrong with the import"
+msgstr ""
+
+#: class.DP_Importer.php:403 class.DP_Importer.php:404
+#: class.DP_Importer.php:479
+msgid "Dribbble Importer"
+msgstr ""
+
+#: class.DP_Importer.php:422
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: class.DP_Importer.php:443
+msgid "Invalid Dribbble username. Please check your spelling."
+msgstr ""
+
+#: class.DP_Importer.php:469
+msgid ""
+"Your Dribbble shots are now being imported in the background. It may take up "
+"to 15 minutes for all shots to be imported."
+msgstr ""
+
+#: class.DP_Importer.php:471
+msgid "Settings Saved"
+msgstr ""
+
+#: class.DP_Importer.php:481
+msgid ""
+"Imports all shots from your Dribbble portfolio. Once the import is complete, "
+"your shots can be edited, deleted, and curated at will."
+msgstr ""
+
+#: class.DP_Importer.php:492
+msgid "Dribbble Username: "
+msgstr ""
+
+#: class.DP_Importer.php:504
+msgid "Import Shots From Dribbble"
+msgstr ""
+
+#: class.DP_Importer.php:507
+msgid "Enter the Dribbble username whose shots should be imported."
+msgstr ""
+
+#: class.DP_Importer.php:515
+msgid "Save Changes"
+msgstr ""
+
+#: class.Freefolio.php:92
+msgid "Your Custom Content Types"
+msgstr ""
+
+#: class.Freefolio.php:99
+msgid "Portfolio Projects"
+msgstr ""
+
+#: class.Freefolio.php:125
+msgid ""
+"Use these settings to display different types of content on your site. <a "
+"target=\"_blank\" href=\"%s\">Learn more</a>."
+msgstr ""
+
+#: class.Freefolio.php:141
+msgid "Enable"
+msgstr ""
+
+#: class.Freefolio.php:146
+msgid "Portfolio pages display at most %1$s projects"
+msgstr ""
+
+#: class.Freefolio.php:233
+msgid "Portfolio Items"
+msgstr ""
+
+#: class.Freefolio.php:235
+msgid "Projects"
+msgstr ""
+
+#: class.Freefolio.php:236 class.Freefolio.php:355
+msgid "Project"
+msgstr ""
+
+#: class.Freefolio.php:237
+msgid "Portfolio"
+msgstr ""
+
+#: class.Freefolio.php:238
+msgid "All Projects"
+msgstr ""
+
+#: class.Freefolio.php:239
+msgid "Add New"
+msgstr ""
+
+#: class.Freefolio.php:240
+msgid "Add New Project"
+msgstr ""
+
+#: class.Freefolio.php:241
+msgid "Edit Project"
+msgstr ""
+
+#: class.Freefolio.php:242
+msgid "New Project"
+msgstr ""
+
+#: class.Freefolio.php:243
+msgid "View Project"
+msgstr ""
+
+#: class.Freefolio.php:244
+msgid "Search Projects"
+msgstr ""
+
+#: class.Freefolio.php:245
+msgid "No Projects found"
+msgstr ""
+
+#: class.Freefolio.php:246
+msgid "No Projects found in Trash"
+msgstr ""
+
+#: class.Freefolio.php:274 class.Freefolio.php:276
+msgid "Project Types"
+msgstr ""
+
+#: class.Freefolio.php:275
+msgid "Project Type"
+msgstr ""
+
+#: class.Freefolio.php:277
+msgid "All Project Types"
+msgstr ""
+
+#: class.Freefolio.php:278
+msgid "Edit Project Type"
+msgstr ""
+
+#: class.Freefolio.php:279
+msgid "View Project Type"
+msgstr ""
+
+#: class.Freefolio.php:280
+msgid "Update Project Type"
+msgstr ""
+
+#: class.Freefolio.php:281
+msgid "Add New Project Type"
+msgstr ""
+
+#: class.Freefolio.php:282
+msgid "New Project Type Name"
+msgstr ""
+
+#: class.Freefolio.php:283
+msgid "Parent Project Type"
+msgstr ""
+
+#: class.Freefolio.php:284
+msgid "Parent Project Type:"
+msgstr ""
+
+#: class.Freefolio.php:285
+msgid "Search Project Types"
+msgstr ""
+
+#: class.Freefolio.php:298 class.Freefolio.php:300
+msgid "Project Tags"
+msgstr ""
+
+#: class.Freefolio.php:299
+msgid "Project Tag"
+msgstr ""
+
+#: class.Freefolio.php:301
+msgid "All Project Tags"
+msgstr ""
+
+#: class.Freefolio.php:302
+msgid "Edit Project Tag"
+msgstr ""
+
+#: class.Freefolio.php:303
+msgid "View Project Tag"
+msgstr ""
+
+#: class.Freefolio.php:304
+msgid "Update Project Tag"
+msgstr ""
+
+#: class.Freefolio.php:305
+msgid "Add New Project Tag"
+msgstr ""
+
+#: class.Freefolio.php:306
+msgid "New Project Tag Name"
+msgstr ""
+
+#: class.Freefolio.php:307
+msgid "Search Project Tags"
+msgstr ""
+
+#: class.Freefolio.php:308
+msgid "Popular Project Tags"
+msgstr ""
+
+#: class.Freefolio.php:309
+msgid "Separate tags with commas"
+msgstr ""
+
+#: class.Freefolio.php:310
+msgid "Add or remove tags"
+msgstr ""
+
+#: class.Freefolio.php:311
+msgid "Choose from the most used tags"
+msgstr ""
+
+#: class.Freefolio.php:312
+msgid "No tags found."
+msgstr ""
+
+#: class.Freefolio.php:331
+msgid "Project updated. <a href=\"%s\">View item</a>"
+msgstr ""
+
+#: class.Freefolio.php:332
+msgid "Custom field updated."
+msgstr ""
+
+#: class.Freefolio.php:333
+msgid "Custom field deleted."
+msgstr ""
+
+#: class.Freefolio.php:334
+msgid "Project updated."
+msgstr ""
+
+#. translators: %s: date and time of the revision
+#: class.Freefolio.php:336
+msgid "Project restored to revision from %s"
+msgstr ""
+
+#: class.Freefolio.php:337
+msgid "Project published. <a href=\"%s\">View project</a>"
+msgstr ""
+
+#: class.Freefolio.php:338
+msgid "Project saved."
+msgstr ""
+
+#: class.Freefolio.php:339
+msgid "Project submitted. <a target=\"_blank\" href=\"%s\">Preview project</a>"
+msgstr ""
+
+#: class.Freefolio.php:340
+msgid ""
+"Project scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
+"\"%2$s\">Preview project</a>"
+msgstr ""
+
+#. translators: Publish box date format, see http:php.net/date
+#: class.Freefolio.php:342
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: class.Freefolio.php:343
+msgid ""
+"Project item draft updated. <a target=\"_blank\" href=\"%s\">Preview "
+"project</a>"
+msgstr ""
+
+#: class.Freefolio.php:557
+msgid ""
+"Your Portfolio Archive currently has no entries. You can start creating them "
+"on your dashboard."
+msgstr ""
+
+#: class.Freefolio.php:606
+msgid "Types"
+msgstr ""
+
+#: class.Freefolio.php:637
+msgid "Tags"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Freefolio"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/freefolio-by-upthemes/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Adds a portfolio post type, custom widget and automatically imports Dribbble "
+"shots."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Matthew Simo and Chris Wallace"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://upthemes.com"
+msgstr ""
