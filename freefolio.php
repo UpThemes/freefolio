@@ -14,7 +14,7 @@
  * Plugin Name:       Freefolio
  * Plugin URI:        http://wordpress.org/plugins/freefolio-by-upthemes/
  * Description:       Adds a portfolio post type, custom widget and automatically imports Dribbble shots.
- * Version:           1.0.1
+ * Version:           1.1.0
  * Author:            Matthew Simo and Chris Wallace
  * Author URI:        https://upthemes.com
  * Text Domain:       freefolio
