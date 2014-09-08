@@ -29,13 +29,33 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+/**
+ * Set up plugin constants
+ */
 define( 'DPI__PLUGIN_DIR',    plugin_dir_path( __FILE__ ) );
 define( 'DPI__PLUGIN_FILE',   __FILE__ );
 
-require_once( DPI__PLUGIN_DIR . 'class.DP_Importer.php' );
+/**
+ * Add localization to the FreeFolio plugin.
+ */
+function freefolio_localize(){
 
-register_activation_hook( DPI__PLUGIN_FILE, array( 'DP_Importer', 'on_plugin_activation' ) );
-register_deactivation_hook( DPI__PLUGIN_FILE, array( 'DP_Importer', 'on_plugin_deactivation' ) );
+	load_plugin_textdomain( 'freefolio', false, basename( dirname( __FILE__ ) ) . '/languages' );
+
+}
+add_action( 'plugins_loaded', 'freefolio_localize' );
+
+/**
+ * Dribbble Importer setup
+ */
+if( is_admin() ){
+
+	require_once( DPI__PLUGIN_DIR . 'class.DP_Importer.php' );
+
+	register_activation_hook( DPI__PLUGIN_FILE, array( 'DP_Importer', 'on_plugin_activation' ) );
+	register_deactivation_hook( DPI__PLUGIN_FILE, array( 'DP_Importer', 'on_plugin_deactivation' ) );
+
+}
 
 add_action( 'init', array( 'DP_Importer', 'init' ) );
 add_action( 'plugins_loaded', array( 'DP_Importer', 'on_plugins_loaded' ), 100 );
