@@ -48,14 +48,11 @@ add_action( 'plugins_loaded', 'freefolio_localize' );
 /**
  * Dribbble Importer setup
  */
-if( is_admin() ){
 
-	require_once( DPI__PLUGIN_DIR . 'class.DP_Importer.php' );
+require_once( DPI__PLUGIN_DIR . 'class.DP_Importer.php' );
 
-	register_activation_hook( DPI__PLUGIN_FILE, array( 'DP_Importer', 'on_plugin_activation' ) );
-	register_deactivation_hook( DPI__PLUGIN_FILE, array( 'DP_Importer', 'on_plugin_deactivation' ) );
-
-}
+register_activation_hook( DPI__PLUGIN_FILE, array( 'DP_Importer', 'on_plugin_activation' ) );
+register_deactivation_hook( DPI__PLUGIN_FILE, array( 'DP_Importer', 'on_plugin_deactivation' ) );
 
 add_action( 'init', array( 'DP_Importer', 'init' ) );
 add_action( 'plugins_loaded', array( 'DP_Importer', 'on_plugins_loaded' ), 100 );
