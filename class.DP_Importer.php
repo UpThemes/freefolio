@@ -157,7 +157,7 @@ if( !class_exists('DP_Importer') ):
      * @param string $username    Dribbble username
      * @param int $page    API pagination number
      *
-     * @return array $reults    array of json decoded results from Dribbble API
+     * @return array $results    array of json decoded results from Dribbble API
      *
      * @static
      * @since   1.1.0
