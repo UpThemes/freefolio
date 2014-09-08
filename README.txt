@@ -12,18 +12,23 @@ The best way to get up and running with a portfolio on your very own WordPress w
 
 == Description ==
 
-Freefolio adds a portfolio to your WordPress website
+Freefolio adds portfolio functionality to your WordPress website that works with any theme. It adds the following items:
 
-* Adds a portfolio post type (compatible with Jetpack)
+* Adds a portfolio post type (compatible with the Jetpack Portfolio post type)
 * Adds a Project Type taxonomy (works like categories)
 * Adds a Project Tag taxonomy (works like tags)
-* Syncs your Dribbble shots to WordPress (imports old shots as well)
+* Imports your Dribbble shots to WordPress
+
+= Coming Soon =
+
+* Portfolio widget (for showcasing recent items in)
+* Find themes that utilize FreeFolio and add customized portfolio views and functionality
 
 = Credits =
 
-- The amazing team at [automattic.com](http://automattic.com/) for [jetpack](http://jetpack.me/) and, specifically, the Jetpack Portfolio post type.
+- The team at [automattic.com](http://automattic.com/) for [jetpack](http://jetpack.me/) and, specifically, the Jetpack Portfolio post type.
 - [Tammy Hart](http://www.tammyhartdesigns.com/) for http://zurb.com/forrst/posts/Dribbble_to_WordPress-wZv
-- [The nice folks at array.is](https://array.is) for their [Jetpack Portfolio Polyfill](https://array.is/articles/designer/#install-array-portfolio) for which I've adapted for use here.
+- [The nice folks at array.is](https://array.is) for the [Jetpack Portfolio Polyfill](https://array.is/articles/designer/#install-array-portfolio) which we've adapted for use here.
 
 == Installation ==
 
