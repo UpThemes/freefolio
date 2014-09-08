@@ -29,7 +29,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'DPI__VERSION',       '1.0.1' );
 define( 'DPI__PLUGIN_DIR',    plugin_dir_path( __FILE__ ) );
 define( 'DPI__PLUGIN_FILE',   __FILE__ );
 
