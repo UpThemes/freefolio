@@ -14,9 +14,10 @@ The best way to get up and running with a portfolio on your very own WordPress w
 
 Freefolio adds portfolio functionality to your WordPress website that works with any theme. It adds the following items:
 
-* Adds a portfolio post type (compatible with the Jetpack Portfolio post type)
-* Adds a Project Type taxonomy (works like categories)
-* Adds a Project Tag taxonomy (works like tags)
+* Portfolio post type (compatible with the Jetpack Portfolio post type)
+* Project Type taxonomy (works like categories)
+* Project Tag taxonomy (works like tags)
+* [portfolio] shortcode to display customized grid of portfolio items
 * Imports your Dribbble shots to WordPress
 
 = Coming Soon =
