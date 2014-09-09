@@ -5,17 +5,17 @@
  * Adds a portfolio post type, custom widget and automatically imports Dribbble shots.
  *
  * @package   Freefolio
- * @author    Matthew Simo <matthew@upthemes.com>
+ * @author    UpThemes <support@upthemes.com>
  * @license   GPL-2.0+
  * @link      https://upthemes.com
  * @copyright 2014 UpThemes
  *
  * @wordpress-plugin
  * Plugin Name:       Freefolio
- * Plugin URI:        http://wordpress.org/plugins/freefolio-by-upthemes/
- * Description:       Adds a portfolio post type, custom widget and automatically imports Dribbble shots.
- * Version:           1.1.1
- * Author:            Matthew Simo and Chris Wallace
+ * Plugin URI:        http://wordpress.org/plugins/freefolio/
+ * Description:       Adds a portfolio to your WordPress website.
+ * Version:           1.1.2
+ * Author:            UpThemes
  * Author URI:        https://upthemes.com
  * Text Domain:       freefolio
  * License:           GPL-2.0+

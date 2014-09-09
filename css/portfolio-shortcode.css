@@ -17,40 +17,59 @@
 	width: 100%;
 }
 
-.column-2 .portfolio-entry {
+.column-2 .portfolio-entry,
+.column-3 .portfolio-entry {
 	max-width: 48%;
 	max-width: -webkit-calc(50% - 20px);
 	max-width: calc(50% - 20px);
 }
 
-.column-3 .portfolio-entry {
-	max-width: 32%;
-	max-width: -webkit-calc(33.3% - 20px);
-	max-width: calc(33.3% - 20px);
+.column-4 .portfolio-entry,
+.column-5 .portfolio-entry,
+.column-6 .portfolio-entry{
+	max-width: 48%;
+	max-width: -webkit-calc(50% - 20px);
+	max-width: calc(50% - 20px);
 }
 
-.column-4 .portfolio-entry {
-	max-width: 23%;
-	max-width: -webkit-calc(25% - 20px);
-	max-width: calc(25% - 20px);
-}
-
-.column-5 .portfolio-entry {
-	max-width: 19%;
-	max-width: -webkit-calc(20% - 20px);
-	max-width: calc(20% - 20px);
-}
-
-.column-6 .portfolio-entry {
-	max-width: 15%;
-	max-width: -webkit-calc(16.7% - 20px);
-	max-width: calc(16.7% - 20px);
-}
 .portfolio-entry.first-item-row {
 	clear: both;
 }
+
 .portfolio-entry.last-item-row {
 	margin-right: 0;
+}
+
+@media screen and ( min-width: 640px ){
+
+	.column-3 .portfolio-entry{
+		max-width: 48%;
+		max-width: -webkit-calc(50% - 20px);
+		max-width: calc(50% - 20px);
+	}
+
+}
+
+@media screen and ( min-width: 760px ){
+
+	.column-4 .portfolio-entry {
+		max-width: 23%;
+		max-width: -webkit-calc(25% - 20px);
+		max-width: calc(25% - 20px);
+	}
+
+	.column-5 .portfolio-entry {
+		max-width: 19%;
+		max-width: -webkit-calc(20% - 20px);
+		max-width: calc(20% - 20px);
+	}
+
+	.column-6 .portfolio-entry {
+		max-width: 15%;
+		max-width: -webkit-calc(16.7% - 20px);
+		max-width: calc(16.7% - 20px);
+	}
+
 }
 
 /* Entry Header */

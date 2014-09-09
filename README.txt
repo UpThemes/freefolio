@@ -4,7 +4,7 @@ Donate link: https://upthemes.com/themes/creative/
 Tags: portfolio,dribbble,post types
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,18 +12,18 @@ The best way to get up and running with a portfolio on your very own WordPress w
 
 == Description ==
 
-Freefolio adds portfolio functionality to your WordPress website that works with any theme. It adds the following items:
+Freefolio adds responsive portfolio functionality to your WordPress website that works with any theme. It adds the following items:
 
 * Portfolio post type (compatible with the Jetpack Portfolio post type)
 * Project Type taxonomy (works like categories)
 * Project Tag taxonomy (works like tags)
-* [portfolio] shortcode to display customized grid of portfolio items
+* [portfolio] shortcode to display a responsive grid of portfolio items
 * Imports your Dribbble shots to WordPress
 
 = Coming Soon =
 
-* Portfolio widget (for showcasing recent items in)
-* Find themes that utilize FreeFolio and add customized portfolio views and functionality
+* Portfolio widget (for showcasing recent items)
+* FreeFolio theme finder
 
 = Credits =
 
@@ -79,10 +79,11 @@ Freefolio adds portfolio functionality to your WordPress website that works with
 
 When the import button is clicked the plugin will work in the background to read your dribbble feed and see if it needs to import any posts.
 
-If it does, it will create `jetpack-portfolio` posts for items that don't exist. It will also create two post meta key/values:
+If it does, it will create `jetpack-portfolio` posts for items that don't exist. It will also create three post meta key/values:
 
-- `dribbble_link_url`: which holds the URL for the shot on dribbble
-- `dribbble_image_url`: which holds the URL for the image src for the shot
+- `dribbble_id`: holds the dribbble shot ID
+- `dribbble_link_url`: holds the URL for the shot on dribbble
+- `dribbble_image_url`: holds the URL for the image src for the shot
 
 = How do I use the portfolio shortcode? =
 
@@ -100,7 +101,19 @@ Shortcode example:
 
 [portfolio display_types=true display_tags=false include_type=ui-design,app-design columns=3 showposts=10]
 
+== Screenshots ==
+
+1. Single portfolio/project view.
+2. Portfolio shortcode view.
+3. Editor shortcode example.
+4. Dribbble import utility.
+5. Portfolio list view.
+
 == Changelog ==
+
+= 1.1.2 =
+* Cleaned up responsive grid styles
+* Updated README instructions
 
 = 1.1.0 =
 * Updated Dribbble importer to use v1 of the Dribbble API
