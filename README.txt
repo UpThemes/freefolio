@@ -4,7 +4,7 @@ Donate link: https://upthemes.com/themes/creative/
 Tags: portfolio,dribbble,post types
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,7 +27,7 @@ Freefolio adds portfolio functionality to your WordPress website that works with
 
 = Credits =
 
-- The team at [automattic.com](http://automattic.com/) for [jetpack](http://jetpack.me/) and, specifically, the Jetpack Portfolio post type.
+- The team at [Automattic](http://automattic.com) for [Jetpack](http://jetpack.me) and, specifically, the Jetpack Portfolio post type.
 - [Tammy Hart](http://www.tammyhartdesigns.com/) for http://zurb.com/forrst/posts/Dribbble_to_WordPress-wZv
 - [The nice folks at array.is](https://array.is) for the [Jetpack Portfolio Polyfill](https://array.is/articles/designer/#install-array-portfolio) which we've adapted for use here.
 

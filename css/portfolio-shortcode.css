@@ -116,6 +116,7 @@
 .portfolio-entry-content {
 	margin: 0.75em 0 0;
 	padding: 0;
+	overflow: hidden;
 }
 
 .portfolio-entry-content > :last-child {
