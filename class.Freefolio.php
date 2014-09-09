@@ -55,6 +55,7 @@ class Freefolio {
     add_image_size( 'jetpack-portfolio-admin-thumb', 50, 50, true );
     add_action( 'admin_enqueue_scripts',                                           array( $this, 'enqueue_admin_styles'  ) );
     add_action( 'after_switch_theme',                                              array( $this, 'flush_rules_on_switch' ) );
+    add_filter( 'the_content',                                                     array( $this, 'prepend_featured_image' ) );
 
     // Portfolio shortcode
     add_shortcode( 'portfolio',                                                    array( $this, 'portfolio_shortcode' ) );
@@ -393,6 +394,17 @@ class Freefolio {
     ) {
       $query->set( 'posts_per_page', get_option( self::OPTION_READING_SETTING, '10' ) );
     }
+  }
+
+  /**
+   * Prepend the featured image for portfolio items when no featured image is supported.
+   */
+  function prepend_featured_image( $content ) {
+    global $_wp_theme_features;
+    if( ! current_theme_supports( 'jetpack-portfolio' ) || ( current_theme_supports( 'jetpack-portfolio' ) && ! $_wp_theme_features['jetpack-portfolio'][0]['has-featured-image'] ) ){
+      $content = get_the_post_thumbnail( $post->ID, 'original' ) . $content;
+    }
+    return $content;
   }
 
   /**
