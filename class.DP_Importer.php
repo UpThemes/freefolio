@@ -200,15 +200,16 @@ if( !class_exists('DP_Importer') ):
       );
 
       $shot_post_meta = array(
-        'link_url' => $item[ 'url' ],
+        'dribbble_shot_id' => $item[ 'id' ],
+        'dribbble_url' => $item[ 'url' ],
         'image' => $item[ 'image' ],
       );
 
       $posts = get_posts(
         array(
           'post_type' => 'jetpack-portfolio',
-          'meta_key' => 'dribbble_link_url',
-          'meta_value'=> $shot_post_meta[ 'link_url' ],
+          'meta_key' => 'dribbble_shot_id',
+          'meta_value'=> $shot_post_meta[ 'dribbble_shot_id' ],
         )
       );
 
@@ -223,9 +224,9 @@ if( !class_exists('DP_Importer') ):
 
         } else {
 
-          update_post_meta( $post_id, 'dribbble_link_url', $shot_post_meta[ 'link_url' ] );
+          update_post_meta( $post_id, 'dribbble_link_url', $shot_post_meta[ 'url' ] );
 
-          update_post_meta( $post_id, 'dribbble_shot_id', $item[ 'id' ] );
+          update_post_meta( $post_id, 'dribbble_shot_id', $shot_post_meta[ 'dribbble_shot_id' ] );
 
           if( $shot_post_meta[ 'image' ] ){
 
