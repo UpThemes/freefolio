@@ -88,13 +88,13 @@ If it does, it will create `jetpack-portfolio` posts for items that don't exist.
 
 Shortcode options:
 
-‘display_types': display Project Types. (true/false)
-‘display_tags': display Project Tags. (true/false)
-‘display_content': display project content. (true/false)
-‘include_type': display specific Project Types. Defaults to all. (comma-separated list of Project Type slugs)
-‘include_tag': display specific Project Tags. Defaults to all. (comma-separated list of Project Tag slugs)
-‘columns': number of&nbsp;columns in shortcode. Defaults to 2. (number, 1-6)
-‘showposts': number of projects to display. Defaults to all. (number)
+* `display_types`: display Project Types. (true/false)
+* `display_tags`: display Project Tags. (true/false)
+* `display_content`: display project content. (true/false)
+* `include_type`: display specific Project Types. Defaults to all. (comma-separated list of Project Type slugs)
+* `include_tag`: display specific Project Tags. Defaults to all. (comma-separated list of Project Tag slugs)
+* `columns`: number of&nbsp;columns in shortcode. Defaults to 2. (number, 1-6)
+* `showposts`: number of projects to display. Defaults to all. (number)
 
 Shortcode example:
 
