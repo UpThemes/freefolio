@@ -4,7 +4,7 @@ Donate link: https://upthemes.com/themes/creative/
 Tags: portfolio,dribbble,post types
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -110,6 +110,9 @@ Shortcode example:
 5. Portfolio list view.
 
 == Changelog ==
+
+= 1.1.3 =
+* Removed duplicate post image on non-portfolio post types
 
 = 1.1.2 =
 * Cleaned up responsive grid styles

@@ -401,9 +401,13 @@ class Freefolio {
    */
   function prepend_featured_image( $content ) {
     global $_wp_theme_features, $post;
-    if( get_post_type( $post ) === 'jetpack-portfolio' && ! current_theme_supports( 'jetpack-portfolio' ) || ( current_theme_supports( 'jetpack-portfolio' ) && ! $_wp_theme_features['jetpack-portfolio'][0]['has-featured-image'] ) ){
+
+    if( get_post_type( $post ) !== 'jetpack-portfolio' )
+      return $content;
+
+    if( ! current_theme_supports( 'jetpack-portfolio' ) || ( current_theme_supports( 'jetpack-portfolio' ) && ! $_wp_theme_features['jetpack-portfolio'][0]['has-featured-image'] ) )
       $content = get_the_post_thumbnail( $post->ID, 'original' ) . $content;
-    }
+
     return $content;
   }
 

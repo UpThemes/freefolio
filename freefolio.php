@@ -14,7 +14,7 @@
  * Plugin Name:       Freefolio
  * Plugin URI:        http://wordpress.org/plugins/freefolio/
  * Description:       Adds a portfolio to your WordPress website.
- * Version:           1.1.2
+ * Version:           1.1.3
  * Author:            UpThemes
  * Author URI:        https://upthemes.com
  * Text Domain:       freefolio
