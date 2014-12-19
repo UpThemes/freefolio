@@ -159,7 +159,7 @@ if( !class_exists( 'DP_Importer' ) ):
         return false;
       }
 
-      $api_url = 'https:// api.dribbble.com/v1/users/' . $username . '/shots?sort=recent&list=attachments&per_page=30&page=' . $page;
+      $api_url = 'https://api.dribbble.com/v1/users/' . $username . '/shots?sort=recent&list=attachments&per_page=30&page=' . $page;
 
       // authenticate
       $opts = array(
@@ -436,7 +436,7 @@ if( !class_exists( 'DP_Importer' ) ):
         // stash user name
         $user_name = $_POST[self::USERNAME_OPTION];
 
-        $api_url = 'https:// api.dribbble.com/v1/users/' . $user_name;
+        $api_url = 'https://api.dribbble.com/v1/users/' . $user_name;
 
         $opts = array(
           'http' => array(
@@ -508,7 +508,7 @@ if( !class_exists( 'DP_Importer' ) ):
           </th>
           <td>
               <?php
-              printf( '<span>http:// dribbble.com/<input name="%1$s" id="%1$s" size="20" type="text" value="%2$s"/></span>',
+              printf( '<span>http://dribbble.com/<input name="%1$s" id="%1$s" size="20" type="text" value="%2$s"/></span>',
                 esc_attr( self::USERNAME_OPTION ),
                 get_option( self::USERNAME_OPTION, '' )
               );
