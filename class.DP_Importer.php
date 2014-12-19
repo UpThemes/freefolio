@@ -8,6 +8,7 @@ if( !class_exists('DP_Importer') ):
     const USERINFO_OPTION = 'dpi_userinfo';
     const DPI_TRANSIENT   = 'dpi_import';
     const PORTFOLIO_CPT   = 'jetpack-portfolio';
+    const TOKEN   = 'b33fe7ed73340d8953ae1eb0d84c3bd5df14c178bb80a337be401f4467ac65aa';
 
 
     /**
@@ -168,7 +169,19 @@ if( !class_exists('DP_Importer') ):
         return false;
       }
 
-      $results = file_get_contents('http://api.dribbble.com/players/' . $username . '/shots?per_page=30&page=' . $page);
+      $api_url = 'https://api.dribbble.com/v1/users/' . $username . '/shots?sort=recent&list=attachments&per_page=30&page=' . $page;
+	
+      // authenticate
+      $opts = array(
+        'http' => array(
+          'method' => 'GET',
+          'header' => 'Authorization: Bearer ' . self::TOKEN,
+        )
+      );
+      
+      $context = stream_context_create($opts);
+      
+      $results = file_get_contents($api_url, false, $context);
 
       if( $results === false ){
         return false;
@@ -351,7 +364,7 @@ if( !class_exists('DP_Importer') ):
 
       $user_info = get_option( self::USERINFO_OPTION );
 
-      $page_count = ceil($user_info['shots_count'] / 30);
+      $page_count = ceil( $user_info['shots_count'] / 30 );
 
       for( $page=1; $page<= $page_count; $page++ ):
 
@@ -363,19 +376,20 @@ if( !class_exists('DP_Importer') ):
           echo '<div class="error"><p><strong>' . __('Oops - somethng went wrong with the import', 'freefolio' ) . '</strong></p></div>';
         } else{
 
-          $shots = array();
-
-          foreach ( $results['shots'] as $item ) {
+          foreach ( $results as $item ) {
 
             //setup data
             $shot_import = array(
               'id' => $item['id'],
-              'url' => esc_url( $item['url'] ),
+              'url' => esc_url( $item['html_url'] ),
               'date' => date('Y-m-d H:i:s', strtotime($item['created_at'])),
               'title' => esc_html( $item['title'] ),
-              'image' => $item['image_url'],
               'description' => $item['description'],
             );
+            
+            // get the best image
+            $images = $item['images'];
+            $shot_import['image'] = ( isset( $images['hidpi'] ) ? $images['hidpi'] : $images['normal']  );
 
             //import the shot
             self::import_dribbble_item( $shot_import );
@@ -433,10 +447,21 @@ if( !class_exists('DP_Importer') ):
 
         //stash user name
         $user_name = $_POST[self::USERNAME_OPTION];
-
+        
+        $api_url = 'https://api.dribbble.com/v1/users/' . $user_name;
+        
+        $opts = array(
+          'http' => array(
+            'method' => 'GET',
+            'header' => 'Authorization: Bearer ' . self::TOKEN,
+          )
+        );
+        
+        $context = stream_context_create($opts);
+	
         //get user info from Dribbble API
-        $user_info = @file_get_contents('http://api.dribbble.com/players/' . $user_name);
-
+        $user_info = @file_get_contents($api_url, false, $context);
+        
         //if no content from Dribble API it's a bad username
         if( $user_info === false ):
 
