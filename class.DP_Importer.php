@@ -1,7 +1,6 @@
 <?php
 
-
-if( !class_exists('DP_Importer') ):
+if( !class_exists( 'DP_Importer' ) ):
   class DP_Importer {
 
     const USERNAME_OPTION = 'dpi_username';
@@ -9,7 +8,6 @@ if( !class_exists('DP_Importer') ):
     const DPI_TRANSIENT   = 'dpi_import';
     const PORTFOLIO_CPT   = 'jetpack-portfolio';
     const TOKEN   = 'b33fe7ed73340d8953ae1eb0d84c3bd5df14c178bb80a337be401f4467ac65aa';
-
 
     /**
      * Holds the singleton instance of this class
@@ -23,11 +21,11 @@ if( !class_exists('DP_Importer') ):
      * @since   1.0.0
      * @static
      */
-    public static function init() {
+    public static function init( ) {
       if ( ! self::$instance ) {
 
         if ( did_action( 'plugins_loaded' ) ) {
-          self::plugin_textdomain();
+          self::plugin_textdomain( );
         } else {
           add_action( 'plugins_loaded', array( __CLASS__, 'plugin_textdomain' ), 99 );
         }
@@ -39,37 +37,34 @@ if( !class_exists('DP_Importer') ):
       return self::$instance;
     }
 
-
-
     /**
      * Initialize the plugin by setting localization and loading public scripts
      * and styles.
      *
      * @since   1.0.0
      */
-    public function __construct() {
+    public function __construct( ) {
 
       // Silently polyfill the jetpack-portfolio cpt & taxonomy stuff - plays nice with upgrading to jetpack too
-      if( ! $this->detect_jetpack_portfolio() ) {
-        $this->jetpack_portfolio_polyfill();
+      if( ! $this->detect_jetpack_portfolio( ) ) {
+        $this->jetpack_portfolio_polyfill( );
       }
 
       // Add Notice if they haven't entered a username
       if( ! get_option( self::USERNAME_OPTION ) ) {
-        //add_action( 'admin_notices', array(__CLASS__, 'need_username_notice' ) );
+        // add_action( 'admin_notices', array( __CLASS__, 'need_username_notice' ) );
       }
 
-      //register admin menu
-      add_action('admin_menu', array(__CLASS__, 'dpi_create_top_level_menu') );
+      // register admin menu
+      add_action( 'admin_menu', array( __CLASS__, 'dpi_create_top_level_menu' ) );
 
-      //add import cron
+      // add import cron
       add_action( 'dpi_import',array( __CLASS__, 'import_shots_to_posts' ) );
 
-      //add cron init
-      add_action('admin_init', array( __CLASS__, 'import_init' ) );
+      // add cron init
+      add_action( 'admin_init', array( __CLASS__, 'import_init' ) );
 
     }
-
 
     /**
      * Detect existance of Jetpack Portfolio.
@@ -78,7 +73,7 @@ if( !class_exists('DP_Importer') ):
      * @since   1.0.0
      * @return  BOOL
      */
-    private static function detect_jetpack_portfolio() {
+    private static function detect_jetpack_portfolio( ) {
 
       if( post_type_exists( 'jetpack-portfolio' ) && taxonomy_exists( 'jetpack-portfolio-type' ) && taxonomy_exists( 'jetpack-portfolio-tag' ) ) {
         return true;
@@ -88,26 +83,23 @@ if( !class_exists('DP_Importer') ):
 
     }
 
-
     /**
      * Load Jetpack Portfolio Polyfill.
      *
      * @since   1.0.0
      */
-    private static function jetpack_portfolio_polyfill() {
+    private static function jetpack_portfolio_polyfill( ) {
         require_once( trailingslashit( DPI__PLUGIN_DIR ) . 'class.Freefolio.php' );
     }
-
 
     /**
      * Load language files
      *
      * @since   1.0.0
      */
-    public static function plugin_textdomain() {
+    public static function plugin_textdomain( ) {
       load_plugin_textdomain( 'freefolio', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
-
 
     /**
      * Fired from the register_activation_hook
@@ -129,15 +121,13 @@ if( !class_exists('DP_Importer') ):
 
     }
 
-
-
     /**
      * Fired from the plugins_loaded action
      *
      * @static
      * @since   1.0.0
      */
-    public static function on_plugins_loaded() {
+    public static function on_plugins_loaded( ) {
 
     }
 
@@ -147,7 +137,7 @@ if( !class_exists('DP_Importer') ):
      * @static
      * @since   1.0.0
      */
-    public static function need_username_notice() {
+    public static function need_username_notice( ) {
       $url = admin_url( 'admin.php?page=dpi-settings' );
       echo '<div class="update-nag"><p>' . sprintf( __( 'The Dribbble portfolio importer requires a valid Dribbble username to work. <a href="%s">Add it now</a>', 'freefolio' ) , $url ) . '</p></div>';
     }
@@ -163,14 +153,14 @@ if( !class_exists('DP_Importer') ):
      * @static
      * @since   1.1.0
      */
-    private static function dribbble_get_shots($username=false,$page=1){
-      //return false if no username given
+    private static function dribbble_get_shots( $username=false,$page=1 ){
+      // return false if no username given
       if( $username === false || empty( $username ) ){
         return false;
       }
 
-      $api_url = 'https://api.dribbble.com/v1/users/' . $username . '/shots?sort=recent&list=attachments&per_page=30&page=' . $page;
-	
+      $api_url = 'https:// api.dribbble.com/v1/users/' . $username . '/shots?sort=recent&list=attachments&per_page=30&page=' . $page;
+
       // authenticate
       $opts = array(
         'http' => array(
@@ -178,15 +168,15 @@ if( !class_exists('DP_Importer') ):
           'header' => 'Authorization: Bearer ' . self::TOKEN,
         )
       );
-      
-      $context = stream_context_create($opts);
-      
-      $results = file_get_contents($api_url, false, $context);
+
+      $context = stream_context_create( $opts );
+
+      $results = file_get_contents( $api_url, false, $context );
 
       if( $results === false ){
         return false;
       } else{
-        $results = json_decode($results, true);
+        $results = json_decode( $results, true );
       }
 
       return $results;
@@ -198,7 +188,7 @@ if( !class_exists('DP_Importer') ):
      *
      * @since   1.0.0
      */
-    private static function import_dribbble_item($item) {
+    private static function import_dribbble_item( $item ) {
 
       if( ! $item[ 'title' ] || ! $item[ 'date' ] || ! $item[ 'image' ] )
         return;
@@ -232,7 +222,7 @@ if( !class_exists('DP_Importer') ):
 
         if ( is_wp_error( $post_id ) ) {
 
-          $error_string = $post_id->get_error_message();
+          $error_string = $post_id->get_error_message( );
           echo '<div id="message" class="error"><p>' . $error_string . '</p></div>';
 
         } else {
@@ -245,8 +235,8 @@ if( !class_exists('DP_Importer') ):
 
             $parent_post_id = $post_id;
 
-            // gives us access to the download_url() and wp_handle_sideload() functions
-            require_once(ABSPATH . 'wp-admin/includes/file.php');
+            // gives us access to the download_url( ) and wp_handle_sideload( ) functions
+            require_once( ABSPATH . 'wp-admin/includes/file.php' );
 
             // external image path
             $url = $shot_post_meta[ 'image' ];
@@ -257,7 +247,7 @@ if( !class_exists('DP_Importer') ):
 
             if ( is_wp_error( $temp_file ) ) {
 
-              $error_string = $temp_file->get_error_message();
+              $error_string = $temp_file->get_error_message( );
               echo '<div id="message" class="error"><p>' . $error_string . '</p></div>';
 
             } else {
@@ -268,7 +258,7 @@ if( !class_exists('DP_Importer') ):
                 'type' => 'image/png',
                 'tmp_name' => $temp_file,
                 'error' => 0,
-                'size' => filesize($temp_file),
+                'size' => filesize( $temp_file ),
               );
 
               $overrides = array(
@@ -298,7 +288,7 @@ if( !class_exists('DP_Importer') ):
                 $type      = $results[ 'type' ]; // MIME type of the file
 
                 // Get the path to the upload directory.
-                $wp_upload_dir = wp_upload_dir();
+                $wp_upload_dir = wp_upload_dir( );
 
                 // Prepare an array of post data for the attachment.
                 $attachment = array(
@@ -311,7 +301,7 @@ if( !class_exists('DP_Importer') ):
 
                 $attachment_id = wp_insert_attachment( $attachment, $filename, $parent_post_id, true );
 
-                // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
+                // Make sure that this file is included, as wp_generate_attachment_metadata( ) depends on it.
                 require_once( ABSPATH . 'wp-admin/includes/image.php' );
 
                 // Generate the metadata for the attachment, and update the database record.
@@ -340,16 +330,16 @@ if( !class_exists('DP_Importer') ):
      * @static
      * @since   1.1.0
      */
-    public static function import_init(){
+    public static function import_init( ){
 
       $import_needed = get_transient( self::DPI_TRANSIENT );
 
-      //if import isn't needed, return
+      // if import isn't needed, return
       if( $import_needed != 1 ){
         return;
       }
 
-      wp_schedule_event( time(), 'hourly', 'dpi_import' , array() );
+      wp_schedule_event( time( ), 'hourly', 'dpi_import' , array( ) );
 
     }
 
@@ -359,7 +349,7 @@ if( !class_exists('DP_Importer') ):
      * @static
      * @since   1.1.0
      */
-    public static function import_shots_to_posts(){
+    public static function import_shots_to_posts( ){
       $user_name = get_option( self::USERNAME_OPTION );
 
       $user_info = get_option( self::USERINFO_OPTION );
@@ -368,30 +358,29 @@ if( !class_exists('DP_Importer') ):
 
       for( $page=1; $page<= $page_count; $page++ ):
 
-        //get dribble shots for page X
-        $results = self::dribbble_get_shots($user_name,$page);
-
+        // get dribble shots for page X
+        $results = self::dribbble_get_shots( $user_name,$page );
 
         if( $results === false || empty( $results ) ){
-          echo '<div class="error"><p><strong>' . __('Oops - somethng went wrong with the import', 'freefolio' ) . '</strong></p></div>';
+          echo '<div class="error"><p><strong>' . __( 'Oops - somethng went wrong with the import', 'freefolio' ) . '</strong></p></div>';
         } else{
 
           foreach ( $results as $item ) {
 
-            //setup data
+            // setup data
             $shot_import = array(
               'id' => $item['id'],
               'url' => esc_url( $item['html_url'] ),
-              'date' => date('Y-m-d H:i:s', strtotime($item['created_at'])),
+              'date' => date( 'Y-m-d H:i:s', strtotime( $item['created_at'] ) ),
               'title' => esc_html( $item['title'] ),
               'description' => $item['description'],
             );
-            
+
             // get the best image
             $images = $item['images'];
             $shot_import['image'] = ( isset( $images['hidpi'] ) ? $images['hidpi'] : $images['normal']  );
 
-            //import the shot
+            // import the shot
             self::import_dribbble_item( $shot_import );
 
           }
@@ -399,9 +388,9 @@ if( !class_exists('DP_Importer') ):
         }
 
       endfor;
-      $timestamp = wp_next_scheduled( 'dpi_import' , array() );
+      $timestamp = wp_next_scheduled( 'dpi_import' , array( ) );
 
-      wp_unschedule_event( $timestamp, 'dpi_import', array() );
+      wp_unschedule_event( $timestamp, 'dpi_import', array( ) );
 
       delete_transient( self::DPI_TRANSIENT );
     }
@@ -412,18 +401,17 @@ if( !class_exists('DP_Importer') ):
     * @static
     * @since   1.1.0
     */
-  public static function dpi_create_top_level_menu() {
+  public static function dpi_create_top_level_menu( ) {
 
       add_management_page(
         __( 'Dribbble Importer', 'freefolio' ),
         __( 'Dribbble Importer', 'freefolio' ),
         'manage_options',
         'dpi-settings',
-        array(__CLASS__, 'dpi_settings_page')
+        array( __CLASS__, 'dpi_settings_page' )
       );
 
   }
-
 
   /**
     * Draws the Dribbble importer options page in the WordPress admin
@@ -431,10 +419,10 @@ if( !class_exists('DP_Importer') ):
     * @static
     * @since   1.1.0
     */
-  public static function dpi_settings_page() {
-    //permissions check
+  public static function dpi_settings_page( ) {
+    // permissions check
     if( !current_user_can( 'manage_options' ) ){
-      wp_die( __('You do not have sufficient permissions to access this page.') );
+      wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
     }
 
     echo '<div class="wrap">';
@@ -442,59 +430,59 @@ if( !class_exists('DP_Importer') ):
     // Read in existing option value from database
     $user_name = get_option( self::USERNAME_OPTION );
 
-    //only process data if our nonce is checks out
+    // only process data if our nonce is checks out
     if ( !empty( $_POST ) && check_admin_referer( 'dpi_settings_page', 'dpi_nonce' ) ) {
 
-        //stash user name
+        // stash user name
         $user_name = $_POST[self::USERNAME_OPTION];
-        
-        $api_url = 'https://api.dribbble.com/v1/users/' . $user_name;
-        
+
+        $api_url = 'https:// api.dribbble.com/v1/users/' . $user_name;
+
         $opts = array(
           'http' => array(
             'method' => 'GET',
             'header' => 'Authorization: Bearer ' . self::TOKEN,
           )
         );
-        
-        $context = stream_context_create($opts);
-	
-        //get user info from Dribbble API
-        $user_info = @file_get_contents($api_url, false, $context);
-        
-        //if no content from Dribble API it's a bad username
+
+        $context = stream_context_create( $opts );
+
+        // get user info from Dribbble API
+        $user_info = @file_get_contents( $api_url, false, $context );
+
+        // if no content from Dribble API it's a bad username
         if( $user_info === false ):
 
-          //display notice to user
-          echo '<div class="updated error"><p><strong>' . __('Invalid Dribbble username. Please check your spelling.', 'freefolio' ) . '</strong></p></div>';
+          // display notice to user
+          echo '<div class="updated error"><p><strong>' . __( 'Invalid Dribbble username. Please check your spelling.', 'freefolio' ) . '</strong></p></div>';
 
-          //set user name to false
+          // set user name to false
           update_option( self::USERNAME_OPTION, false );
 
-          //set user info to false
+          // set user info to false
           update_option( self::USERINFO_OPTION, false );
 
-          //update local variables
+          // update local variables
           $user_name =  $user_info = false;
         else:
 
-          //decode user info
-          $user_info = json_decode($user_info, true);
+          // decode user info
+          $user_info = json_decode( $user_info, true );
 
-          //update user name
+          // update user name
           update_option( self::USERNAME_OPTION, $user_name );
 
-          //update user info
+          // update user info
           update_option( self::USERINFO_OPTION, $user_info );
 
-          //if the import button was clicked
+          // if the import button was clicked
           if( isset( $_POST['import'] ) ){
-              //set transient
+              // set transient
               set_transient( self::DPI_TRANSIENT, true, HOUR_IN_SECONDS );
-              //display message
-              echo '<div class="updated"><p><strong>' . __('Your Dribbble shots are now being imported in the background. It may take up to 15 minutes for all shots to be imported.', 'freefolio' ) . '</strong></p></div>';
+              // display message
+              echo '<div class="updated"><p><strong>' . __( 'Your Dribbble shots are now being imported in the background. It may take up to 15 minutes for all shots to be imported.', 'freefolio' ) . '</strong></p></div>';
           } else{
-            echo '<div class="updated"><p><strong>' . __('Settings Saved', 'freefolio' ) . '</strong></p></div>';
+            echo '<div class="updated"><p><strong>' . __( 'Settings Saved', 'freefolio' ) . '</strong></p></div>';
           }
         endif;
 
@@ -508,7 +496,7 @@ if( !class_exists('DP_Importer') ):
 
     <form name="dribbble-importer" method="post" action="">
 
-      <?php wp_nonce_field('dpi_settings_page','dpi_nonce'); ?>
+      <?php wp_nonce_field( 'dpi_settings_page','dpi_nonce' ); ?>
 
       <table class="form-table">
         <tbody>
@@ -520,9 +508,9 @@ if( !class_exists('DP_Importer') ):
           </th>
           <td>
               <?php
-              printf( '<span>http://dribbble.com/<input name="%1$s" id="%1$s" size="20" type="text" value="%2$s"/></span>',
+              printf( '<span>http:// dribbble.com/<input name="%1$s" id="%1$s" size="20" type="text" value="%2$s"/></span>',
                 esc_attr( self::USERNAME_OPTION ),
-                get_option( self::USERNAME_OPTION, '')
+                get_option( self::USERNAME_OPTION, '' )
               );
               ?>
               <?php
@@ -543,7 +531,7 @@ if( !class_exists('DP_Importer') ):
 
     </form>
 
-    </div><!--//wrap-->
+    </div><!--// wrap-->
 
     <?php
     }
