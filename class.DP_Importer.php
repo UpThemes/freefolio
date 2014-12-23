@@ -212,7 +212,7 @@ if( !class_exists( 'DP_Importer' ) ):
         'dribbble_url' => $item[ 'url' ],
         'image' => $item[ 'image' ],
       );
-      
+
       $args = array(
         'post_type' => self::PORTFOLIO_CPT,
         'meta_key' => 'dribbble_shot_id',
@@ -224,100 +224,102 @@ if( !class_exists( 'DP_Importer' ) ):
       if ( $the_query->have_posts() ) {
         wp_reset_postdata();
         return;
-    }
+      }
 
-      $post_id = @wp_insert_post( $shot_post, true );
+        $post_id = @wp_insert_post( $shot_post, true );
 
-      if ( is_wp_error( $post_id ) ) {
+        if ( is_wp_error( $post_id ) ) {
 
-        $error_string = $post_id->get_error_message( );
-        echo '<div id="message" class="error"><p>' . $error_string . '</p></div>';
+          $error_string = $post_id->get_error_message( );
+          echo '<div id="message" class="error"><p>' . $error_string . '</p></div>';
 
-      } else {
+        } else {
 
-        update_post_meta( $post_id, 'dribbble_link_url', $shot_post_meta[ 'url' ] );
+          update_post_meta( $post_id, 'dribbble_link_url', $shot_post_meta[ 'url' ] );
 
-        update_post_meta( $post_id, 'dribbble_shot_id', $shot_post_meta[ 'dribbble_shot_id' ] );
+          update_post_meta( $post_id, 'dribbble_shot_id', $shot_post_meta[ 'dribbble_shot_id' ] );
 
-        if( $shot_post_meta[ 'image' ] ){
+          if( $shot_post_meta[ 'image' ] ){
 
-          $parent_post_id = $post_id;
+            $parent_post_id = $post_id;
 
-          // gives us access to the download_url( ) and wp_handle_sideload( ) functions
-          require_once( ABSPATH . 'wp-admin/includes/file.php' );
+            // gives us access to the download_url( ) and wp_handle_sideload( ) functions
+            require_once( ABSPATH . 'wp-admin/includes/file.php' );
 
-          // external image path
-          $url = $shot_post_meta[ 'image' ];
-          $timeout_seconds = 5;
+            // external image path
+            $url = $shot_post_meta[ 'image' ];
+            $timeout_seconds = 5;
 
-          // download file to temp dir
-          $temp_file = download_url( $url, $timeout_seconds );
+            // download file to temp dir
+            $temp_file = download_url( $url, $timeout_seconds );
 
-          if ( is_wp_error( $temp_file ) ) {
+            if ( is_wp_error( $temp_file ) ) {
 
-            $error_string = $temp_file->get_error_message( );
-            echo '<div id="message" class="error"><p>' . $error_string . '</p></div>';
+              $error_string = $temp_file->get_error_message( );
+              echo '<div id="message" class="error"><p>' . $error_string . '</p></div>';
 
-          } else {
-
-            // array based on $_FILE as seen in PHP file uploads
-            $file = array(
-              'name' => basename( $url ), // ex: wp-header-logo.png
-              'type' => 'image/png',
-              'tmp_name' => $temp_file,
-              'error' => 0,
-              'size' => filesize( $temp_file ),
-            );
-
-            $overrides = array(
-              // tells WordPress to not look for the POST form
-              // fields that would normally be present, default is true,
-              // we downloaded the file from a remote server, so there
-              // will be no form fields
-              'test_form' => false,
-
-              // setting this to false lets WordPress allow empty files, not recommended
-              'test_size' => true,
-
-              // A properly uploaded file will pass this test.
-              // There should be no reason to override this one.
-              'test_upload' => true,
-            );
-
-            // move the temporary file into the uploads directory
-            $results = wp_handle_sideload( $file, $overrides );
-
-            if ( ! empty( $results[ 'error' ] ) ) {
-              // insert any error handling here
             } else {
 
-              $filename  = $results[ 'file' ]; // full path to the file
-              $local_url = $results[ 'url' ]; // URL to the file in the uploads dir
-              $type      = $results[ 'type' ]; // MIME type of the file
-
-              // Get the path to the upload directory.
-              $wp_upload_dir = wp_upload_dir( );
-
-              // Prepare an array of post data for the attachment.
-              $attachment = array(
-                'guid' => $wp_upload_dir[ 'url' ] . '/' . basename( $filename ),
-                'post_mime_type' => $type,
-                'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
-                'post_content' => '',
-                'post_status' => 'inherit'
+              // array based on $_FILE as seen in PHP file uploads
+              $file = array(
+                'name' => basename( $url ), // ex: wp-header-logo.png
+                'type' => 'image/png',
+                'tmp_name' => $temp_file,
+                'error' => 0,
+                'size' => filesize( $temp_file ),
               );
 
-              $attachment_id = wp_insert_attachment( $attachment, $filename, $parent_post_id, true );
+              $overrides = array(
+                // tells WordPress to not look for the POST form
+                // fields that would normally be present, default is true,
+                // we downloaded the file from a remote server, so there
+                // will be no form fields
+                'test_form' => false,
 
-              // Make sure that this file is included, as wp_generate_attachment_metadata( ) depends on it.
-              require_once( ABSPATH . 'wp-admin/includes/image.php' );
+                // setting this to false lets WordPress allow empty files, not recommended
+                'test_size' => true,
 
-              // Generate the metadata for the attachment, and update the database record.
-              $attach_data = wp_generate_attachment_metadata( $attachment_id, $filename );
-              wp_update_attachment_metadata( $attachment_id, $attach_data );
+                // A properly uploaded file will pass this test.
+                // There should be no reason to override this one.
+                'test_upload' => true,
+              );
 
-              if( $attachment_id ){
-                set_post_thumbnail( $parent_post_id, $attachment_id );
+              // move the temporary file into the uploads directory
+              $results = wp_handle_sideload( $file, $overrides );
+
+              if ( ! empty( $results[ 'error' ] ) ) {
+                // insert any error handling here
+              } else {
+
+                $filename  = $results[ 'file' ]; // full path to the file
+                $local_url = $results[ 'url' ]; // URL to the file in the uploads dir
+                $type      = $results[ 'type' ]; // MIME type of the file
+
+                // Get the path to the upload directory.
+                $wp_upload_dir = wp_upload_dir( );
+
+                // Prepare an array of post data for the attachment.
+                $attachment = array(
+                  'guid' => $wp_upload_dir[ 'url' ] . '/' . basename( $filename ),
+                  'post_mime_type' => $type,
+                  'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+                  'post_content' => '',
+                  'post_status' => 'inherit'
+                );
+
+                $attachment_id = wp_insert_attachment( $attachment, $filename, $parent_post_id, true );
+
+                // Make sure that this file is included, as wp_generate_attachment_metadata( ) depends on it.
+                require_once( ABSPATH . 'wp-admin/includes/image.php' );
+
+                // Generate the metadata for the attachment, and update the database record.
+                $attach_data = wp_generate_attachment_metadata( $attachment_id, $filename );
+                wp_update_attachment_metadata( $attachment_id, $attach_data );
+
+                if( $attachment_id ){
+                  set_post_thumbnail( $parent_post_id, $attachment_id );
+                }
+
               }
 
             }
@@ -325,8 +327,6 @@ if( !class_exists( 'DP_Importer' ) ):
           }
 
         }
-
-      }
 
 
     }
@@ -439,21 +439,25 @@ if( !class_exists( 'DP_Importer' ) ):
     $api_key = get_option( self::API_KEY_OPTION );
 
     // only process data if our nonce is checks out
-    if ( !empty( $_POST ) && check_admin_referer( 'dpi_settings_page', 'dpi_nonce' ) && isset( $_POST[self::API_KEY_OPTION] ) ) {
+    if ( !empty( $_POST ) && check_admin_referer( 'dpi_settings_page', 'dpi_nonce' ) ) {
+      
+      if( isset( $_POST[self::API_KEY_OPTION] ) ){
+        // stash api key
+        $api_key = $_POST[self::API_KEY_OPTION];
+        if( empty( $api_key ) ){
+          echo '<div class="updated error"><p><strong>' . __( 'Please enter your Dribbble API key.', 'freefolio' ) . '</strong></p></div>';
+          update_option( self::API_KEY_OPTION, false );
+        }
+        update_option( self::API_KEY_OPTION, $api_key );
+      }
 
         if( isset( $_POST[self::USERNAME_OPTION] ) ){
           // stash user name
           $user_name = $_POST[self::USERNAME_OPTION];
         }
         
-        if( isset( $_POST[self::API_KEY_OPTION] ) ){
-          // stash api key
-          $api_key = $_POST[self::API_KEY_OPTION];
-          update_option( self::API_KEY_OPTION, $api_key );
-        }
         
-        
-        if( !empty( $user_name ) && !empty( $api_key ) ){
+        // if( !empty( $user_name ) ){
 
           $api_url = 'https://api.dribbble.com/v1/users/' . $user_name;
           
@@ -512,7 +516,7 @@ if( !class_exists( 'DP_Importer' ) ):
             }
           endif;
           
-        }
+        // }
 
     }
 
