@@ -397,13 +397,18 @@ if( ! class_exists( 'DP_Importer' ) ):
         }
 
       endfor;
-      /*
+      
+      self::stop_import();
+    }
+    
+    public static function stop_import() {
+
       $timestamp = wp_next_scheduled( 'dpi_import' , array() );
 
       wp_unschedule_event( $timestamp, 'dpi_import', array() );
 
       delete_transient( self::DPI_TRANSIENT );
-      */
+
     }
 
   /**
@@ -484,6 +489,9 @@ if( ! class_exists( 'DP_Importer' ) ):
   
             // update local variables
             $user_name =  $user_info = $api_key = false;
+
+            // stop the import
+            self::stop_import();
           // if the response isn't 200 (such as 404 not found) or has a different user name the user name is bad
           elseif( $response['response']['code']  != 200 || $user_info['username'] != $user_name ):
             // display notice to user
@@ -494,6 +502,9 @@ if( ! class_exists( 'DP_Importer' ) ):
   
             // update local variables
             $user_name =  $user_info = false;
+
+            // stop the import
+            self::stop_import();
           // otherwise we are good to go
           else:
   
