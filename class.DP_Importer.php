@@ -582,7 +582,7 @@ if( ! class_exists( 'DP_Importer' ) ):
 
     </form>
 
-    </div><! --// wrap-->
+    </div><!--// wrap-->
 
     <?php
     }
