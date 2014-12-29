@@ -1,6 +1,6 @@
 <?php
 
-if( !class_exists( 'DP_Importer' ) ):
+if( ! class_exists( 'DP_Importer' ) ):
   class DP_Importer {
 
     const USERNAME_OPTION = 'dpi_username';
@@ -177,7 +177,7 @@ if( !class_exists( 'DP_Importer' ) ):
       $response = wp_remote_get( $api_url, $params );
       
       // return false if error or not 200 response
-      if( is_wp_error( $response ) || $response['response']['code'] != 200 ){
+      if( is_wp_error( $response ) || $response['response']['code'] ! = 200 ){
         return false;
       }
       
@@ -329,7 +329,7 @@ if( !class_exists( 'DP_Importer' ) ):
       $import_needed = get_transient( self::DPI_TRANSIENT );
 
       // if import isn't needed, return
-      if( $import_needed != 1 ){
+      if( $import_needed ! = 1 ){
         return;
       }
 
@@ -383,7 +383,7 @@ if( !class_exists( 'DP_Importer' ) ):
             
             $the_query = new WP_Query( $args );
             
-            if ( !$the_query->have_posts() ) {
+            if ( ! $the_query->have_posts() ) {
               
               // import the shot
               self::import_dribbble_item( $shot_import );
@@ -430,7 +430,7 @@ if( !class_exists( 'DP_Importer' ) ):
     */
   public static function dpi_settings_page() {
     // permissions check
-    if( !current_user_can( 'manage_options' ) ){
+    if( ! current_user_can( 'manage_options' ) ){
       wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
     }
 
@@ -441,7 +441,7 @@ if( !class_exists( 'DP_Importer' ) ):
     $api_key = get_option( self::API_KEY_OPTION );
 
     // only process data if our nonce is checks out
-    if ( !empty( $_POST ) && check_admin_referer( 'dpi_settings_page', 'dpi_nonce' ) ) {
+    if ( ! empty( $_POST ) && check_admin_referer( 'dpi_settings_page', 'dpi_nonce' ) ) {
       
       if( isset( $_POST[self::API_KEY_OPTION] ) ){
         // stash api key
@@ -483,7 +483,7 @@ if( !class_exists( 'DP_Importer' ) ):
             // update local variables
             $user_name =  $user_info = $api_key = false;
           // if the response isn't 200 (such as 404 not found) or has a different user name the user name is bad
-          elseif( $response['response']['code']  != 200 || $user_info['username'] != $user_name ):
+          elseif( $response['response']['code']  ! = 200 || $user_info['username'] ! = $user_name ):
             // display notice to user
             echo '<div class="updated error"><p><strong>' . __( 'Invalid Dribbble username. Please check your spelling.', 'freefolio' ) . '</strong></p></div>';
   
@@ -546,7 +546,7 @@ if( !class_exists( 'DP_Importer' ) ):
           </td>
         </tr>
         <?php
-        if( $api_key != false ){
+        if( $api_key ! = false ){
           ?>
           <tr>
             <th scope="row">
@@ -562,7 +562,7 @@ if( !class_exists( 'DP_Importer' ) ):
                 );
                 ?>
                 <?php
-                if( $user_name != false ){
+                if( $user_name ! = false ){
                   echo ' <input type="submit" name="import" class="button-secondary" style="margin-left:25px;" value="' . __( 'Import Shots From Dribbble', 'freefolio' ) . '" />';
                 } else {
                 ?>
@@ -582,7 +582,7 @@ if( !class_exists( 'DP_Importer' ) ):
 
     </form>
 
-    </div><!--// wrap-->
+    </div><! --// wrap-->
 
     <?php
     }
