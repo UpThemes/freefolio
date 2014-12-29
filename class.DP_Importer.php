@@ -397,11 +397,13 @@ if( ! class_exists( 'DP_Importer' ) ):
         }
 
       endfor;
+      /*
       $timestamp = wp_next_scheduled( 'dpi_import' , array() );
 
       wp_unschedule_event( $timestamp, 'dpi_import', array() );
 
       delete_transient( self::DPI_TRANSIENT );
+      */
     }
 
   /**
